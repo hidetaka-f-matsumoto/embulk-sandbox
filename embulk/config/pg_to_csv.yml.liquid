@@ -1,0 +1,14 @@
+in:
+  type: postgresql
+  host: {{ env.PG_HOST_NAME }}
+  port: {{ env.PG_PORT }}
+  user: {{ env.PG_USER }}
+  database: {{ env.PG_DB_NAME }}
+  query: {{ env.PG_QUERY }}
+
+out:
+  type: file
+  path_prefix: './tmp/pg_to_csv_'
+  file_ext: csv
+  formatter:
+    type: csv

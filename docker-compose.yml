@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  pg:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: test
+      POSTGRES_USER: embulk
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - 54321:5432
+    volumes:
+      - ./pg/initdb:/docker-entrypoint-initdb.d
+
+  embulk:
+    build:
+      context: ./embulk
+    command: run.sh
+    environment:
+      PG_HOST_NAME: pg
+      PG_PORT: 5432
+      PG_USER: embulk
+      PG_DB_NAME: test
+    volumes:
+      - ./embulk:/app
+    depends_on:
+      - pg

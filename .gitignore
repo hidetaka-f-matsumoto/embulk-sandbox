@@ -1,0 +1,2 @@
+embulk/tmp/*
+!embulk/tmp/.keep
